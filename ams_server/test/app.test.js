@@ -63,9 +63,39 @@ describe('CRUD Locations', () => {
             .expect(200)
             .then((response) => {
                 expect(response.body.location).to.be.a('object');
-                //fixtures.location.location_id = response.body.location.location_id;
+                fixtures.location.location_id = response.body.location.location_id;
                 expect(response.body.location).to.deep.equal(fixtures.location);
                 done();
-            })
-    })
+            });
+    });
+
+    it('Updates a record', (done) => {
+        fixtures.location.room_number = 215;
+        request(app)
+            .put('/api/locations/5')
+            .send(fixtures.location)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((response) => {
+                expect(response.body.location).to.be.a('object');
+                expect(response.body.location).to.deep.equal(fixtures.location);
+                done();
+            });
+    });
+
+    it('Deletes a record', (done) => {  // need to update
+        request(app)
+            .delete('/api/locations/5')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((response) => {
+                expect(response.body).to.be.a('object');
+                expect(response.body).to.deep.equal({
+                    success: true
+                });
+                done();
+            });
+    });
 });

@@ -36,6 +36,29 @@ router.post('/', (req, res, next) => {
     }else{
         next(new Error('Invalid Location'));
     }
-})
+});
+
+router.put('/:id', isValidId, (req, res, next) => {
+    if(validLocation(req.body)){
+        queries.update(req.params.id, req.body).then(results => {
+            if(results.length>0)
+                res.status(200).json({success: true, location: results[0]});
+            else
+                next();
+                   
+        });
+    }else{
+        next(new Error('Invalid Location'));
+    } 
+});
+router.delete('/:id', isValidId, (req, res, next) => {
+    if(validLocation(req.body)){
+        queries.delete(req.params.id).then(() => {
+            res.status(200).json({success: true});   
+        });
+    }else{
+        next(new Error('Invalid Location'));
+    } 
+});
 
 module.exports = router;
