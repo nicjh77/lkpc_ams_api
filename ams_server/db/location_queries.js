@@ -4,8 +4,11 @@ module.exports = {
     getAll() {
         return knex('location');
     },
-    getOne() {
+    getOne(id) {
         return knex('location')
-            .where({location_id: 1});
+            .where('location_id', id).first();
+    },
+    create(location) {
+        return knex('location').insert(location, '*');
     }
 }

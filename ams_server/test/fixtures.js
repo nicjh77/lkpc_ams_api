@@ -17,14 +17,14 @@ const locations = [
   } 
 ]
 
-// const location = {
-//     "room_number": 208,
-//     "room_name": "IT Team",
-//     "place": "2nd south"
-// };
+const location = {
+    "location_id": 5,
+    "room_number": 208,
+    "room_name": "IT Team",
+    "place": "2nd south"
+};
 
 module.exports = {
-    locations
-    // ,
-    // location
+    locations,
+    location
 }

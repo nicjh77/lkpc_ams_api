@@ -27,4 +27,45 @@ describe('CRUD Locations', () => {
                 done();  
             });
     });
+
+    it('Show one record by id', (done) => {
+        request(app)
+            .get('/api/locations/1')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((response) => {
+                expect(response.body.location).to.be.a('object');
+                expect(response.body.location).to.deep.equal(fixtures.locations[0]) 
+                done();  
+            });
+    });
+
+    it('Show one record by id', (done) => {
+        request(app)
+            .get('/api/locations/3')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((response) => {
+                expect(response.body.location).to.be.a('object');
+                expect(response.body.location).to.deep.equal(fixtures.locations[2]) 
+                done();  
+            });
+    });
+
+    it('Creates a record', (done) => {
+        request(app)
+            .post('/api/locations')
+            .send(fixtures.location)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .then((response) => {
+                expect(response.body.location).to.be.a('object');
+                //fixtures.location.location_id = response.body.location.location_id;
+                expect(response.body.location).to.deep.equal(fixtures.location);
+                done();
+            })
+    })
 });
