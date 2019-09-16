@@ -7,9 +7,9 @@
 /doc.txt
 
 # mock data
-/seeds
-/locations.js
-/persons.js
+# /seeds
+# /locations.js
+# /persons.js
 
 # db connection
-/knexfile.js
+# /knexfile.js
